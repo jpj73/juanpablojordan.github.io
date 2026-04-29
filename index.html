@@ -20,18 +20,18 @@
 			   DESIGN TOKENS
 			   ============================================================ */
 			:root {
-				--bg:           #e7e3d6;   /* warm parchment / stone */
-				--surface:      #faf8f1;   /* cream surface for sections */
-				--surface-alt:  #f1ede0;   /* slightly deeper cream */
-				--sidebar-bg:   #f7f4ea;   /* sidebar matches the cream family */
-				--text:         #232622;   /* warm near-black */
-				--text-muted:   #6a6f6b;
-				--accent:       #2d5a3d;   /* deep forest green */
-				--accent-hover: #3d7a52;
-				--accent-soft:  #e3ebde;
-				--border:       #d6d1c2;
-				--shadow-sm:    0 1px 2px rgba(20, 25, 22, 0.05), 0 2px 6px rgba(20, 25, 22, 0.05);
-				--shadow-md:    0 4px 12px rgba(20, 25, 22, 0.07), 0 12px 28px rgba(20, 25, 22, 0.09);
+				--bg:           #e6e4e0;   /* warm light grey */
+				--surface:      #f3f1ed;   /* lighter warm grey */
+				--surface-alt:  #dcd9d3;   /* deeper warm grey */
+				--sidebar-bg:   #efece7;   /* sidebar in same grey family */
+				--text:         #2a2725;   /* warm near-black */
+				--text-muted:   #6e6a64;
+				--accent:       #c4632b;   /* terracotta / burnt orange */
+				--accent-hover: #d97127;
+				--accent-soft:  #f4e3d2;   /* soft peach */
+				--border:       #c8c3bb;
+				--shadow-sm:    0 1px 2px rgba(30, 25, 20, 0.05), 0 2px 6px rgba(30, 25, 20, 0.05);
+				--shadow-md:    0 4px 12px rgba(30, 25, 20, 0.07), 0 12px 28px rgba(30, 25, 20, 0.09);
 				--radius:       10px;
 				--radius-lg:    14px;
 				--font-serif:   'Fraunces', Georgia, 'Times New Roman', serif;
@@ -76,30 +76,51 @@
 			#header .top {
 				padding-top: 2.5em;
 			}
+			/* Override the template's absolute-positioned logo layout
+			   with a flex column so avatar/title/subtitle stack cleanly. */
 			#header #logo {
-				border-bottom: 1px solid var(--border);
-				padding-bottom: 1.75em;
-				margin-bottom: 1.5em;
-				text-align: center;
-				display: block;
+				position: relative !important;
+				display: flex !important;
+				flex-direction: column !important;
+				align-items: center !important;
+				justify-content: center !important;
+				text-align: center !important;
+				padding: 0 1em 1.75em 1em !important;
+				margin-bottom: 1.5em !important;
+				border-bottom: 1px solid var(--border) !important;
+				min-height: 0 !important;
+				height: auto !important;
 			}
-			/* Force the avatar onto its own line, sized properly, above the title. */
+			/* Reset and resize the avatar — kill any absolute positioning
+			   the template applies, force block, force size. */
 			#header #logo .image.avatar48 {
+				position: static !important;
+				float: none !important;
 				display: block !important;
 				width: 96px !important;
 				height: 96px !important;
 				min-width: 96px !important;
+				min-height: 96px !important;
+				max-width: 96px !important;
+				max-height: 96px !important;
 				border-radius: 50% !important;
 				overflow: hidden !important;
-				margin: 0 auto 1em auto !important;
+				margin: 0 0 1em 0 !important;
 				padding: 0 !important;
+				top: auto !important;
+				left: auto !important;
+				right: auto !important;
+				bottom: auto !important;
 				box-shadow: var(--shadow-sm);
 				border: 2px solid var(--surface) !important;
 				outline: 1px solid var(--border);
 				background: var(--surface);
+				flex: 0 0 auto !important;
 			}
-			#header #logo .image.avatar48::before {
-				display: none !important; /* kill any template overlay icon */
+			#header #logo .image.avatar48::before,
+			#header #logo .image.avatar48::after {
+				display: none !important;
+				content: none !important;
 			}
 			#header #logo .image.avatar48 img {
 				display: block !important;
@@ -107,6 +128,22 @@
 				height: 100% !important;
 				object-fit: cover !important;
 				border-radius: 50% !important;
+				margin: 0 !important;
+				padding: 0 !important;
+				position: static !important;
+			}
+			/* Reset any padding-left the template adds to the title to make
+			   room for an absolutely positioned avatar — we've gone flex now. */
+			#header #logo h1#title {
+				position: static !important;
+				padding: 0 !important;
+				margin: 0 0 0.25em 0 !important;
+				line-height: 1.25 !important;
+			}
+			#header #logo p {
+				position: static !important;
+				padding: 0 !important;
+				margin: 0 !important;
 			}
 			#header #logo h1#title {
 				font-family: var(--font-serif) !important;
@@ -125,12 +162,12 @@
 
 			#header #nav ul li a {
 				font-family: var(--font-sans) !important;
-				font-size: 0.92em !important;
+				font-size: 1.1em !important;
 				font-weight: 500 !important;
 				letter-spacing: 0.02em !important;
 				text-transform: none !important;
 				color: var(--text-muted) !important;
-				padding: 0.6em 0 !important;
+				padding: 0.85em 0 !important;
 				border: none !important;
 				transition: color 0.2s ease;
 			}
@@ -140,7 +177,8 @@
 			}
 			#header #nav ul li a .icon::before {
 				color: var(--accent);
-				margin-right: 0.6em;
+				margin-right: 0.7em;
+				font-size: 1.05em;
 			}
 
 			/* Sidebar social icons (re-purposed) */
@@ -208,8 +246,8 @@
 				min-height: 0 !important;
 				padding: 5.5em 0 5em 0 !important;
 				background:
-					radial-gradient(ellipse at top right, rgba(45, 90, 61, 0.12), transparent 60%),
-					radial-gradient(ellipse at bottom left, rgba(45, 90, 61, 0.08), transparent 55%),
+					radial-gradient(ellipse at top right, rgba(196, 99, 43, 0.14), transparent 60%),
+					radial-gradient(ellipse at bottom left, rgba(196, 99, 43, 0.09), transparent 55%),
 					var(--bg) !important;
 				color: var(--text) !important;
 				border-bottom: 1px solid var(--border);
@@ -238,7 +276,7 @@
 			}
 			#top header a {
 				color: var(--accent) !important;
-				border-bottom: 1px solid rgba(45, 90, 61, 0.25);
+				border-bottom: 1px solid rgba(196, 99, 43, 0.3);
 				padding-bottom: 1px;
 			}
 			#top header a:hover {
@@ -331,7 +369,7 @@
 			#portfolio .item:hover {
 				transform: translateY(-3px);
 				box-shadow: var(--shadow-md);
-				border-color: rgba(45, 90, 61, 0.25);
+				border-color: rgba(196, 99, 43, 0.3);
 			}
 			#portfolio .item .image.fit {
 				margin: 0 !important;
@@ -408,7 +446,7 @@
 				font-weight: 600;
 				color: var(--accent);
 				text-decoration: none;
-				border-bottom: 1px solid rgba(45, 90, 61, 0.3);
+				border-bottom: 1px solid rgba(196, 99, 43, 0.35);
 				padding-bottom: 1px;
 			}
 			#portfolio .item .research-details a.pub-link:hover {
@@ -471,6 +509,26 @@
 				background: var(--accent);
 				color: #fff;
 				border-color: var(--accent);
+			}
+			/* Inline-SVG icons (Bluesky) sit inside the same circular badge. */
+			#contact .contact-links a .icon svg {
+				width: 26px;
+				height: 26px;
+				fill: currentColor;
+				display: block;
+			}
+			/* Sidebar inline-SVG icons inherit the icons-list color/hover. */
+			#header .icons li a.icon-svg {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 32px;
+				height: 32px;
+			}
+			#header .icons li a.icon-svg svg {
+				width: 18px;
+				height: 18px;
+				fill: currentColor;
 			}
 
 			/* ============================================================
@@ -539,6 +597,12 @@
 					<li><a href="mailto:jpj95@cornell.edu" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
 					<li><a href="https://scholar.google.com/" target="_blank" rel="noopener" class="icon brands fa-google"><span class="label">Google Scholar</span></a></li>
 					<li><a href="https://www.researchgate.net/" target="_blank" rel="noopener" class="icon brands fa-researchgate"><span class="label">ResearchGate</span></a></li>
+					<li><a href="https://bsky.app/" target="_blank" rel="noopener" class="icon-svg" aria-label="Bluesky">
+						<svg viewBox="0 0 600 530" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+							<path d="M135.7 44.4C211.7 101.4 293.4 216.9 323.4 278.9c30-62 111.7-177.5 187.7-234.5 54.8-41.1 143.7-72.9 143.7 28.3 0 20.2-11.6 169.7-18.4 194-23.6 84.4-109.7 105.9-186.3 92.9 133.9 22.8 168 98.3 94.4 173.8-139.8 143.4-200.9-36-216.6-82-2.9-8.4-4.2-12.4-4.3-9 0-3.4-1.5.6-4.3 9-15.7 46-76.8 225.4-216.6 82C29.1 458 63.2 382.4 197.1 359.6 120.5 372.6 34.4 351.1 10.8 266.7 4 242.4-7.6 92.9-7.6 72.7c0-101.2 88.9-69.4 143.7-28.3z" transform="translate(7.6 0)"/>
+						</svg>
+						<span class="label">Bluesky</span>
+					</a></li>
 				</ul>
 			</div>
 		</div>
@@ -723,6 +787,16 @@
 							<a href="https://www.researchgate.net/" target="_blank" rel="noopener">
 								<span class="icon brands fa-researchgate"></span>
 								<span>ResearchGate</span>
+							</a>
+						</li>
+						<li>
+							<a href="https://bsky.app/" target="_blank" rel="noopener" aria-label="Bluesky">
+								<span class="icon">
+									<svg viewBox="0 0 600 530" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+										<path d="M135.7 44.4C211.7 101.4 293.4 216.9 323.4 278.9c30-62 111.7-177.5 187.7-234.5 54.8-41.1 143.7-72.9 143.7 28.3 0 20.2-11.6 169.7-18.4 194-23.6 84.4-109.7 105.9-186.3 92.9 133.9 22.8 168 98.3 94.4 173.8-139.8 143.4-200.9-36-216.6-82-2.9-8.4-4.2-12.4-4.3-9 0-3.4-1.5.6-4.3 9-15.7 46-76.8 225.4-216.6 82C29.1 458 63.2 382.4 197.1 359.6 120.5 372.6 34.4 351.1 10.8 266.7 4 242.4-7.6 92.9-7.6 72.7c0-101.2 88.9-69.4 143.7-28.3z" transform="translate(7.6 0)"/>
+									</svg>
+								</span>
+								<span>Bluesky</span>
 							</a>
 						</li>
 					</ul>
