@@ -20,17 +20,18 @@
 			   DESIGN TOKENS
 			   ============================================================ */
 			:root {
-				--bg:           #faf9f6;   /* warm off-white */
-				--surface:      #ffffff;
-				--surface-alt:  #f3f1ec;   /* subtle stone */
-				--text:         #1f2421;   /* warm near-black */
+				--bg:           #e7e3d6;   /* warm parchment / stone */
+				--surface:      #faf8f1;   /* cream surface for sections */
+				--surface-alt:  #f1ede0;   /* slightly deeper cream */
+				--sidebar-bg:   #f7f4ea;   /* sidebar matches the cream family */
+				--text:         #232622;   /* warm near-black */
 				--text-muted:   #6a6f6b;
 				--accent:       #2d5a3d;   /* deep forest green */
 				--accent-hover: #3d7a52;
-				--accent-soft:  #e8efe9;
-				--border:       #e4e0d6;
-				--shadow-sm:    0 1px 2px rgba(20, 25, 22, 0.04), 0 2px 6px rgba(20, 25, 22, 0.04);
-				--shadow-md:    0 4px 12px rgba(20, 25, 22, 0.06), 0 12px 28px rgba(20, 25, 22, 0.08);
+				--accent-soft:  #e3ebde;
+				--border:       #d6d1c2;
+				--shadow-sm:    0 1px 2px rgba(20, 25, 22, 0.05), 0 2px 6px rgba(20, 25, 22, 0.05);
+				--shadow-md:    0 4px 12px rgba(20, 25, 22, 0.07), 0 12px 28px rgba(20, 25, 22, 0.09);
 				--radius:       10px;
 				--radius-lg:    14px;
 				--font-serif:   'Fraunces', Georgia, 'Times New Roman', serif;
@@ -68,7 +69,7 @@
 			   SIDEBAR / HEADER
 			   ============================================================ */
 			#header {
-				background: var(--surface) !important;
+				background: var(--sidebar-bg) !important;
 				border-right: 1px solid var(--border);
 				box-shadow: var(--shadow-sm);
 			}
@@ -79,21 +80,33 @@
 				border-bottom: 1px solid var(--border);
 				padding-bottom: 1.75em;
 				margin-bottom: 1.5em;
+				text-align: center;
+				display: block;
 			}
+			/* Force the avatar onto its own line, sized properly, above the title. */
 			#header #logo .image.avatar48 {
-				width: 88px !important;
-				height: 88px !important;
+				display: block !important;
+				width: 96px !important;
+				height: 96px !important;
+				min-width: 96px !important;
 				border-radius: 50% !important;
-				overflow: hidden;
-				margin-bottom: 1em !important;
+				overflow: hidden !important;
+				margin: 0 auto 1em auto !important;
+				padding: 0 !important;
 				box-shadow: var(--shadow-sm);
-				border: 2px solid var(--surface);
+				border: 2px solid var(--surface) !important;
 				outline: 1px solid var(--border);
+				background: var(--surface);
+			}
+			#header #logo .image.avatar48::before {
+				display: none !important; /* kill any template overlay icon */
 			}
 			#header #logo .image.avatar48 img {
+				display: block !important;
 				width: 100% !important;
 				height: 100% !important;
-				object-fit: cover;
+				object-fit: cover !important;
+				border-radius: 50% !important;
 			}
 			#header #logo h1#title {
 				font-family: var(--font-serif) !important;
@@ -152,7 +165,10 @@
 				background: transparent !important;
 			}
 			#main section .container {
-				max-width: 980px;
+				max-width: 1200px !important;
+				width: calc(100% - 4em) !important;
+				padding-left: 2em !important;
+				padding-right: 2em !important;
 			}
 			#main section > .container > header {
 				margin-bottom: 2.5em;
@@ -260,8 +276,8 @@
 			}
 			#about .profile-photo {
 				float: right;
-				width: 280px;
-				margin: 0.25em 0 1.5em 2em;
+				width: 320px;
+				margin: 0.25em 0 1.5em 2.5em;
 				border-radius: var(--radius-lg);
 				box-shadow: var(--shadow-md);
 			}
@@ -295,12 +311,12 @@
 			   RESEARCH (#portfolio)
 			   ============================================================ */
 			#portfolio > .container > p {
-				max-width: 760px;
+				max-width: 880px;
 				margin: 0 auto 3em auto;
 				text-align: center;
 				color: var(--text-muted);
-				font-size: 1.02em;
-				line-height: 1.7;
+				font-size: 1.05em;
+				line-height: 1.75;
 			}
 			#portfolio .item {
 				position: relative;
