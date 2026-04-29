@@ -71,6 +71,63 @@
 			#portfolio .item.is-open .research-toggle::after {
 				content: " \25B2"; /* up arrow when open */
 			}
+
+			/* --- Make the intro section smaller --- */
+			/* Override the default full-height "cover" intro so it
+			   takes up less vertical space and feels more compact. */
+			#top.cover {
+				min-height: 0 !important;
+				padding: 4em 0 4em 0 !important;
+			}
+			#top .container {
+				padding: 0 2em;
+			}
+			#top header h2 {
+				font-size: 1.6em;
+				line-height: 1.4em;
+				margin-bottom: 0.5em;
+			}
+			#top header p {
+				font-size: 1em;
+				margin: 0.5em 0 0 0;
+			}
+			#top footer {
+				margin-top: 1.25em;
+			}
+
+			/* --- Contact section: simple icon row --- */
+			#contact .contact-links {
+				list-style: none;
+				padding: 0;
+				margin: 1.5em 0 0 0;
+				display: flex;
+				justify-content: center;
+				gap: 2.5em;
+				flex-wrap: wrap;
+			}
+			#contact .contact-links li {
+				text-align: center;
+			}
+			#contact .contact-links a {
+				display: inline-flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 0.4em;
+				color: inherit;
+				text-decoration: none;
+				font-size: 0.95em;
+				transition: transform 0.2s ease, color 0.2s ease;
+			}
+			#contact .contact-links a:hover {
+				transform: translateY(-3px);
+				color: #4a90e2;
+			}
+			#contact .contact-links a .icon {
+				font-size: 2.2em;
+			}
+			#contact .contact-links a .icon::before {
+				font-size: 1em;
+			}
 		</style>
 	</head>
 	<body class="is-preload">
@@ -259,25 +316,29 @@
 				<!-- Contact -->
 					<section id="contact" class="four">
 						<div class="container">
-							<header style = "text-align: center;">
+							<header style="text-align: center;">
 								<h2>Contact</h2>
 							</header>
-							<p>Elementum sem parturient nulla quam placerat viverra
-							mauris non cum elit tempus ullamcorper dolor. Libero rutrum ut lacinia
-							donec curae mus. Eleifend id porttitor ac ultricies lobortis sem nunc
-							orci ridiculus faucibus a consectetur. Porttitor curae mauris urna mi dolor.</p>
-							<form method="post" action="#">
-								<div class="row">
-									<div class="col-6 col-12-mobile"><input type="text" name="name" placeholder="Name" /></div>
-									<div class="col-6 col-12-mobile"><input type="text" name="email" placeholder="Email" /></div>
-									<div class="col-12">
-										<textarea name="message" placeholder="Message"></textarea>
-									</div>
-									<div class="col-12">
-										<input type="submit" value="Send Message" />
-									</div>
-								</div>
-							</form>
+							<ul class="contact-links">
+								<li>
+									<a href="mailto:jpj95@cornell.edu">
+										<span class="icon solid fa-envelope"></span>
+										<span>Email</span>
+									</a>
+								</li>
+								<li>
+									<a href="https://scholar.google.com/" target="_blank" rel="noopener">
+										<span class="icon brands fa-google"></span>
+										<span>Google Scholar</span>
+									</a>
+								</li>
+								<li>
+									<a href="https://www.researchgate.net/" target="_blank" rel="noopener">
+										<span class="icon brands fa-researchgate"></span>
+										<span>ResearchGate</span>
+									</a>
+								</li>
+							</ul>
 						</div>
 					</section>
 			</div>
