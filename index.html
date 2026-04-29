@@ -1,105 +1,420 @@
 <!DOCTYPE HTML>
 <!--
-	Prologue by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	Originally Prologue by HTML5 UP — heavily customized for
+	Juan Pablo Jordán's academic site.
 -->
-<html>
+<html lang="en">
 	<head>
 		<title>Juan Pablo Jordán</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+
+		<!-- Modern type pairing: Fraunces (serif) for display, Inter for body. -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
 		<style>
-			/* Make each research item a positioning context so the
-			   description panel can sit "behind/below" the card. */
-			#portfolio .item {
-				position: relative;
+			/* ============================================================
+			   DESIGN TOKENS
+			   ============================================================ */
+			:root {
+				--bg:           #faf9f6;   /* warm off-white */
+				--surface:      #ffffff;
+				--surface-alt:  #f3f1ec;   /* subtle stone */
+				--text:         #1f2421;   /* warm near-black */
+				--text-muted:   #6a6f6b;
+				--accent:       #2d5a3d;   /* deep forest green */
+				--accent-hover: #3d7a52;
+				--accent-soft:  #e8efe9;
+				--border:       #e4e0d6;
+				--shadow-sm:    0 1px 2px rgba(20, 25, 22, 0.04), 0 2px 6px rgba(20, 25, 22, 0.04);
+				--shadow-md:    0 4px 12px rgba(20, 25, 22, 0.06), 0 12px 28px rgba(20, 25, 22, 0.08);
+				--radius:       10px;
+				--radius-lg:    14px;
+				--font-serif:   'Fraunces', Georgia, 'Times New Roman', serif;
+				--font-sans:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 			}
 
-			/* Make the title/image act like a clickable card. */
+			/* ============================================================
+			   GLOBAL OVERRIDES (template reset)
+			   ============================================================ */
+			html, body {
+				background: var(--bg) !important;
+			}
+			body, input, textarea, select, button {
+				font-family: var(--font-sans) !important;
+				color: var(--text) !important;
+				font-weight: 400;
+				line-height: 1.65;
+			}
+			h1, h2, h3, h4, h5, h6 {
+				font-family: var(--font-serif) !important;
+				color: var(--text) !important;
+				font-weight: 600;
+				letter-spacing: -0.01em;
+			}
+			a {
+				color: var(--accent);
+				text-decoration: none;
+				transition: color 0.2s ease;
+			}
+			a:hover {
+				color: var(--accent-hover);
+			}
+
+			/* ============================================================
+			   SIDEBAR / HEADER
+			   ============================================================ */
+			#header {
+				background: var(--surface) !important;
+				border-right: 1px solid var(--border);
+				box-shadow: var(--shadow-sm);
+			}
+			#header .top {
+				padding-top: 2.5em;
+			}
+			#header #logo {
+				border-bottom: 1px solid var(--border);
+				padding-bottom: 1.75em;
+				margin-bottom: 1.5em;
+			}
+			#header #logo .image.avatar48 {
+				width: 88px !important;
+				height: 88px !important;
+				border-radius: 50% !important;
+				overflow: hidden;
+				margin-bottom: 1em !important;
+				box-shadow: var(--shadow-sm);
+				border: 2px solid var(--surface);
+				outline: 1px solid var(--border);
+			}
+			#header #logo .image.avatar48 img {
+				width: 100% !important;
+				height: 100% !important;
+				object-fit: cover;
+			}
+			#header #logo h1#title {
+				font-family: var(--font-serif) !important;
+				font-size: 1.35em !important;
+				font-weight: 600 !important;
+				margin: 0 0 0.2em 0 !important;
+				color: var(--text) !important;
+			}
+			#header #logo p {
+				color: var(--text-muted) !important;
+				font-size: 0.85em !important;
+				letter-spacing: 0.04em;
+				text-transform: uppercase;
+				margin: 0 !important;
+			}
+
+			#header #nav ul li a {
+				font-family: var(--font-sans) !important;
+				font-size: 0.92em !important;
+				font-weight: 500 !important;
+				letter-spacing: 0.02em !important;
+				text-transform: none !important;
+				color: var(--text-muted) !important;
+				padding: 0.6em 0 !important;
+				border: none !important;
+				transition: color 0.2s ease;
+			}
+			#header #nav ul li a:hover,
+			#header #nav ul li a.active {
+				color: var(--accent) !important;
+			}
+			#header #nav ul li a .icon::before {
+				color: var(--accent);
+				margin-right: 0.6em;
+			}
+
+			/* Sidebar social icons (re-purposed) */
+			#header .bottom {
+				border-top: 1px solid var(--border);
+				padding-top: 1.25em;
+			}
+			#header .icons li a {
+				color: var(--text-muted) !important;
+				transition: color 0.2s ease, transform 0.2s ease;
+			}
+			#header .icons li a:hover {
+				color: var(--accent) !important;
+				transform: translateY(-2px);
+			}
+
+			/* ============================================================
+			   SECTIONS — base
+			   ============================================================ */
+			#main section {
+				padding: 5em 0 !important;
+				background: transparent !important;
+			}
+			#main section .container {
+				max-width: 980px;
+			}
+			#main section > .container > header {
+				margin-bottom: 2.5em;
+				text-align: center;
+			}
+			#main section > .container > header h2 {
+				font-size: 2em;
+				margin: 0;
+				position: relative;
+				display: inline-block;
+				padding-bottom: 0.4em;
+			}
+			#main section > .container > header h2::after {
+				content: "";
+				position: absolute;
+				left: 50%;
+				bottom: 0;
+				transform: translateX(-50%);
+				width: 48px;
+				height: 3px;
+				background: var(--accent);
+				border-radius: 2px;
+			}
+
+			/* Alternate striping for visual rhythm */
+			#about, #contact {
+				background: var(--surface) !important;
+			}
+			#portfolio {
+				background: var(--surface-alt) !important;
+			}
+
+			/* ============================================================
+			   INTRO
+			   ============================================================ */
+			#top.cover {
+				min-height: 0 !important;
+				padding: 5.5em 0 5em 0 !important;
+				background:
+					radial-gradient(ellipse at top right, rgba(45, 90, 61, 0.12), transparent 60%),
+					radial-gradient(ellipse at bottom left, rgba(45, 90, 61, 0.08), transparent 55%),
+					var(--bg) !important;
+				color: var(--text) !important;
+				border-bottom: 1px solid var(--border);
+			}
+			#top.cover .container {
+				padding: 0 2em;
+			}
+			#top header h2.alt {
+				font-family: var(--font-serif) !important;
+				font-size: 2em !important;
+				font-weight: 500 !important;
+				line-height: 1.35 !important;
+				color: var(--text) !important;
+				margin: 0 0 0.6em 0 !important;
+				letter-spacing: -0.015em;
+			}
+			#top header h2.alt strong {
+				font-weight: 600;
+				color: var(--text);
+			}
+			#top header p {
+				font-size: 1.05em;
+				color: var(--text-muted) !important;
+				margin: 0 !important;
+				line-height: 1.6;
+			}
+			#top header a {
+				color: var(--accent) !important;
+				border-bottom: 1px solid rgba(45, 90, 61, 0.25);
+				padding-bottom: 1px;
+			}
+			#top header a:hover {
+				border-bottom-color: var(--accent);
+			}
+			#top footer {
+				margin-top: 2em;
+			}
+			#top .button.scrolly {
+				background: var(--accent) !important;
+				color: #fff !important;
+				border: none !important;
+				border-radius: 999px !important;
+				padding: 0.85em 1.8em !important;
+				font-weight: 500 !important;
+				font-size: 0.92em !important;
+				letter-spacing: 0.02em !important;
+				text-transform: none !important;
+				box-shadow: var(--shadow-sm);
+				transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+			}
+			#top .button.scrolly:hover {
+				background: var(--accent-hover) !important;
+				transform: translateY(-1px);
+				box-shadow: var(--shadow-md);
+			}
+
+			/* ============================================================
+			   ABOUT
+			   ============================================================ */
+			#about p {
+				font-size: 1.02em;
+				color: var(--text);
+				line-height: 1.75;
+			}
+			#about .profile-photo {
+				float: right;
+				width: 280px;
+				margin: 0.25em 0 1.5em 2em;
+				border-radius: var(--radius-lg);
+				box-shadow: var(--shadow-md);
+			}
+			.cv-button {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.6em;
+				background: var(--accent);
+				color: #fff !important;
+				padding: 0.85em 1.6em;
+				border-radius: 999px;
+				font-weight: 500;
+				font-size: 0.95em;
+				margin-top: 1.5em;
+				box-shadow: var(--shadow-sm);
+				transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+			}
+			.cv-button:hover {
+				background: var(--accent-hover);
+				color: #fff !important;
+				transform: translateY(-1px);
+				box-shadow: var(--shadow-md);
+			}
+			.cv-row {
+				clear: both;
+				text-align: center;
+				margin-top: 2em;
+			}
+
+			/* ============================================================
+			   RESEARCH (#portfolio)
+			   ============================================================ */
+			#portfolio > .container > p {
+				max-width: 760px;
+				margin: 0 auto 3em auto;
+				text-align: center;
+				color: var(--text-muted);
+				font-size: 1.02em;
+				line-height: 1.7;
+			}
+			#portfolio .item {
+				position: relative;
+				background: var(--surface);
+				border: 1px solid var(--border);
+				border-radius: var(--radius-lg);
+				overflow: hidden;
+				margin-bottom: 1.75em !important;
+				box-shadow: var(--shadow-sm);
+				transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+			}
+			#portfolio .item:hover {
+				transform: translateY(-3px);
+				box-shadow: var(--shadow-md);
+				border-color: rgba(45, 90, 61, 0.25);
+			}
+			#portfolio .item .image.fit {
+				margin: 0 !important;
+				border-radius: 0 !important;
+				overflow: hidden;
+			}
+			#portfolio .item .image.fit img {
+				display: block;
+				width: 100%;
+				height: 180px;
+				object-fit: cover;
+				transition: transform 0.5s ease;
+			}
+			#portfolio .item:hover .image.fit img {
+				transform: scale(1.04);
+			}
+			#portfolio .item > header {
+				padding: 1em 1.1em 1.1em 1.1em;
+			}
+			#portfolio .item h3 {
+				font-family: var(--font-serif) !important;
+				font-size: 1em !important;
+				font-weight: 600 !important;
+				line-height: 1.4 !important;
+				margin: 0 !important;
+				color: var(--text) !important;
+			}
 			#portfolio .item .research-toggle {
 				cursor: pointer;
 				display: block;
 				color: inherit;
 				text-decoration: none;
 			}
+			#portfolio .item .research-toggle::after {
+				content: " \25BC";
+				font-size: 0.7em;
+				color: var(--text-muted);
+				margin-left: 0.4em;
+				display: inline-block;
+				transition: color 0.2s ease;
+			}
+			#portfolio .item.is-open .research-toggle::after {
+				content: " \25B2";
+				color: var(--accent);
+			}
 
-			/* The hidden description box. It "reveals" when the parent
-			   .item gets the .is-open class. */
 			#portfolio .item .research-details {
 				max-height: 0;
 				overflow: hidden;
 				opacity: 0;
-				margin-top: 0;
+				margin: 0;
 				padding: 0 1.25em;
-				background: #f4f4f4;
-				border-left: 4px solid #888;
-				border-radius: 6px;
-				color: #333;
-				font-size: 0.95em;
-				line-height: 1.5em;
+				background: var(--accent-soft);
+				border-top: 1px solid var(--border);
+				color: var(--text);
+				font-size: 0.92em;
+				line-height: 1.6;
 				transition: max-height 0.45s ease,
 				            opacity 0.35s ease,
-				            margin-top 0.35s ease,
 				            padding 0.35s ease;
 			}
-
 			#portfolio .item.is-open .research-details {
-				max-height: 800px; /* large enough to fit content */
+				max-height: 800px;
 				opacity: 1;
-				margin-top: 0.75em;
-				padding: 1em 1.25em;
+				padding: 1.1em 1.25em 1.25em 1.25em;
 			}
-
+			#portfolio .item .research-details p {
+				margin: 0;
+				color: var(--text);
+			}
 			#portfolio .item .research-details a.pub-link {
 				display: inline-block;
-				margin-top: 0.6em;
-				font-weight: bold;
-				text-decoration: underline;
+				margin-top: 0.85em;
+				font-weight: 600;
+				color: var(--accent);
+				text-decoration: none;
+				border-bottom: 1px solid rgba(45, 90, 61, 0.3);
+				padding-bottom: 1px;
+			}
+			#portfolio .item .research-details a.pub-link:hover {
+				color: var(--accent-hover);
+				border-bottom-color: var(--accent-hover);
 			}
 
-			/* Tiny visual cue that the cards are clickable. */
-			#portfolio .item .research-toggle::after {
-				content: " \25BC"; /* down arrow */
-				font-size: 0.75em;
-				color: #888;
-				margin-left: 0.35em;
-				transition: transform 0.3s ease;
-				display: inline-block;
-			}
-			#portfolio .item.is-open .research-toggle::after {
-				content: " \25B2"; /* up arrow when open */
-			}
-
-			/* --- Make the intro section smaller --- */
-			/* Override the default full-height "cover" intro so it
-			   takes up less vertical space and feels more compact. */
-			#top.cover {
-				min-height: 0 !important;
-				padding: 4em 0 4em 0 !important;
-			}
-			#top .container {
-				padding: 0 2em;
-			}
-			#top header h2 {
-				font-size: 1.6em;
-				line-height: 1.4em;
-				margin-bottom: 0.5em;
-			}
-			#top header p {
+			/* ============================================================
+			   CONTACT
+			   ============================================================ */
+			#contact .contact-intro {
+				text-align: center;
+				color: var(--text-muted);
+				max-width: 580px;
+				margin: 0 auto 2em auto;
 				font-size: 1em;
-				margin: 0.5em 0 0 0;
+				line-height: 1.7;
 			}
-			#top footer {
-				margin-top: 1.25em;
-			}
-
-			/* --- Contact section: simple icon row --- */
 			#contact .contact-links {
 				list-style: none;
 				padding: 0;
-				margin: 1.5em 0 0 0;
+				margin: 0 auto;
 				display: flex;
 				justify-content: center;
 				gap: 2.5em;
@@ -112,270 +427,323 @@
 				display: inline-flex;
 				flex-direction: column;
 				align-items: center;
-				gap: 0.4em;
-				color: inherit;
-				text-decoration: none;
-				font-size: 0.95em;
+				gap: 0.6em;
+				color: var(--text-muted) !important;
+				font-size: 0.88em;
+				font-weight: 500;
+				letter-spacing: 0.02em;
 				transition: transform 0.2s ease, color 0.2s ease;
 			}
 			#contact .contact-links a:hover {
+				color: var(--accent) !important;
 				transform: translateY(-3px);
-				color: #4a90e2;
 			}
 			#contact .contact-links a .icon {
-				font-size: 2.2em;
+				width: 60px;
+				height: 60px;
+				border-radius: 50%;
+				background: var(--surface-alt);
+				border: 1px solid var(--border);
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 1.5em;
+				color: var(--accent);
+				transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 			}
-			#contact .contact-links a .icon::before {
-				font-size: 1em;
+			#contact .contact-links a:hover .icon {
+				background: var(--accent);
+				color: #fff;
+				border-color: var(--accent);
+			}
+
+			/* ============================================================
+			   FOOTER
+			   ============================================================ */
+			#footer {
+				border-top: 1px solid var(--border);
+				background: var(--bg) !important;
+			}
+			#footer .copyright {
+				color: var(--text-muted) !important;
+				font-size: 0.85em;
+			}
+			#footer .copyright a {
+				color: var(--text-muted) !important;
+				border-bottom: 1px dotted var(--text-muted);
+			}
+			#footer .copyright a:hover {
+				color: var(--accent) !important;
+				border-bottom-color: var(--accent);
+			}
+
+			/* ============================================================
+			   RESPONSIVE
+			   ============================================================ */
+			@media screen and (max-width: 736px) {
+				#about .profile-photo {
+					float: none;
+					display: block;
+					width: min(260px, 70%);
+					margin: 0 auto 1.5em auto;
+				}
+				#top header h2.alt {
+					font-size: 1.5em !important;
+				}
+				#contact .contact-links {
+					gap: 1.5em;
+				}
+				#main section > .container > header h2 {
+					font-size: 1.6em;
+				}
 			}
 		</style>
 	</head>
 	<body class="is-preload">
-		<!-- Header -->
-			<div id="header">
-				<div class="top">
-					<!-- Logo -->
-						<div id="logo">
-							<span class="image avatar48"><img src="images/avatar.jpg" alt="" /></span>
-							<h1 id="title">Juan Pablo Jordán</h1>
-							<p>PhD(c), Cornell University</p>
-						</div>
-					<!-- Nav -->
-						<nav id="nav">
-							<ul>
-								<li><a href="#top" id="top-link"><span class="icon solid fa-home">Intro</span></a></li>
-								<li><a href="#about" id="about-link"><span class="icon solid fa-user">About Me</span></a></li>
-								<li><a href="#portfolio" id="portfolio-link"><span class="icon solid fa-th">Research</span></a></li>
-								<li><a href="#contact" id="contact-link"><span class="icon solid fa-envelope">Contact</span></a></li>
-							</ul>
-						</nav>
-				</div>
-				<div class="bottom">
-					<!-- Social Icons -->
-						<ul class="icons">
-							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-							<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-							<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-							<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-						</ul>
-				</div>
-			</div>
-		<!-- Main -->
-			<div id="main">
-				<!-- Intro -->
-					<section id="top" class="one dark cover">
-						<div class="container">
-							<header>
-								<h2 class="alt"><strong>Hi! I'm Juan Pablo Jordán, PhD candidate in the <a href="https://blogs.cornell.edu/kesslerlab/">Kessler Lab</a>
-								 at Cornell University.</h2>
-								<p>I'm currently based the <a href="https://ecologyandevolution.cornell.edu/"> Department of Ecology and Evolutionary Biology</a><br />
-								Ithaca, NY <strong></p>
-							</header>
-							<footer>
-								<a href="#portfolio" class="button scrolly">Learn more :)</a>
-							</footer>
-						</div>
-					</section>
-<!-- About Me -->
-<section id="about" class="three">
-	<div class="container">
-		<header style = "text-align: center;">
-			<h2>About Me</h2>
-		</header>
-		<img src="images/profile_pic_1.jpeg"
-			 alt="Profile picture"
-			 style="float: right; width: 320px; margin: 0 0 30px 40px; border-radius: 10px;" />
-		<p>
-			I'm an organismal biologist, currently doing a PhD in Ecology and Evolutionary Biology at Cornell University.
-			I was born and raised in Ecuador where I quickly found special interest in the amazing biodiversity around me.
-			I spent most of my undergraduate career chasing neotropical spiders, which took me to conduct fieldwork in the tropical montane forests and the Amazon basin.
-			Recently, I have found new interest in the natural compounds that mediate ecological interactions, which I will be exploring during my first year of graduate school.
-			I am committed to efforts in creating equal opportunity and representation of all groups in science, especially those from developing countries.
-			I strongly believe that diversity is an asset that strengthens our community by the enrichment of various backgrounds, life experiences and points of view.
-		</p>
-		 <object width="1000" height="1000" type="application/pdf" data="images/CV- Juan Pablo Jordan.pdf">
-                                        <p>PDF cannot be displayed.</p>
-                                        </object>
-	</div>
-</section>
 
-<!-- Portfolio -->
-<section id="portfolio" class="two">
-						<div class="container">
-							<header style = "text-align: center;">
-								<h2>Research</h2>
-							</header>
-							<p>My resarch interests lie at the intersection between chemical ecology and agroecology.
-								By studying diversified cropping systems, I try to better understand the chemical and
-								ecological mechanisms through which species interactions both above and below ground
-								mediate resistance to herbivores.
-								I also work in naturally-evoling tropical systems to test different hypotheses
-								testing for the maintenance of phytochemical diversity in plants. </p>
-							<div class="row">
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit research-toggle"><img src="images/Graphical_abstract.tiff" alt="" /></a>
-										<header>
-											<a href="#" class="research-toggle">
-												<h3>Intercropping and Cover cropping differentially alter maize secondary metabolism
-													and affect herbivore resistance</h3>
-											</a>
-										</header>
-										<div class="research-details">
-											<p>
-												This study examines how intercropping and cover cropping practices reshape
-												maize secondary metabolism and, in turn, plant resistance to herbivores.
-												Using metabolomic profiling and bioassays, we identify shifts in defensive
-												chemistry that depend on the identity of the companion plant and the timing
-												of the diversification strategy.
-											</p>
-											<a class="pub-link" href="#" target="_blank" rel="noopener">Read the publication &rarr;</a>
-										</div>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit research-toggle"><img src="images/pic03.jpg" alt="" /></a>
-										<header>
-											<a href="#" class="research-toggle">
-												<h3>Seed chemical treatments impact on soil microbiome</h3>
-											</a>
-										</header>
-										<div class="research-details">
-											<p>
-												We evaluate how commonly used seed chemical treatments (fungicides,
-												insecticides, and biological coatings) influence the assembly and function
-												of the rhizosphere microbiome, with consequences for plant performance and
-												belowground community dynamics.
-											</p>
-											<a class="pub-link" href="#" target="_blank" rel="noopener">Read the publication &rarr;</a>
-										</div>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit research-toggle"><img src="images/pic04.jpg" alt="" /></a>
-										<header>
-											<a href="#" class="research-toggle">
-												<h3>Phytochemical diversity correlates with herbivore interactor diversity in the Andean
-												shrub Baccharis latifolia</h3>
-											</a>
-										</header>
-										<div class="research-details">
-											<p>
-												Working in Andean ecosystems, this project tests whether plant chemical
-												diversity scales with the diversity of associated herbivores. We use
-												field surveys and untargeted metabolomics in <em>Baccharis latifolia</em>
-												to evaluate hypotheses on the maintenance of phytochemical diversity.
-											</p>
-											<a class="pub-link" href="#" target="_blank" rel="noopener">Read the publication &rarr;</a>
-										</div>
-									</article>
-								</div>
-								<div class="col-4 col-12-mobile">
-									<article class="item">
-										<a href="#" class="image fit research-toggle"><img src="images/figure_1.tiff" alt="" /></a>
-										<header>
-											<a href="#" class="research-toggle">
-												<h3>Intercrop-mediated inducibility affects direct defenses and herbivore resistance
-													but not indirect defenses in maize</h3>
-											</a>
-										</header>
-										<div class="research-details">
-											<p>
-												This work shows that intercropping primes maize for stronger induced direct
-												defenses and improved herbivore resistance, while indirect defenses
-												(volatile-mediated natural enemy attraction) remain largely unchanged. The
-												results have implications for designing biodiversity-based pest management.
-											</p>
-											<a class="pub-link" href="#" target="_blank" rel="noopener">Read the publication &rarr;</a>
-										</div>
-									</article>
-									<article class="item">
-										<a href="#" class="image fit research-toggle"><img src="images/pic07.jpg" alt="" /></a>
-										<header>
-											<a href="#" class="research-toggle">
-												<h3>How does intercropping facilitate beneficial maize-amf interactions
-													and induced responses? </h3>
-											</a>
-										</header>
-										<div class="research-details">
-											<p>
-												An ongoing project investigating how intercropping with legumes shapes
-												arbuscular mycorrhizal fungi (AMF) communities associated with maize, and
-												how those belowground partnerships modulate inducible defenses against
-												aboveground herbivores.
-											</p>
-											<a class="pub-link" href="#" target="_blank" rel="noopener">Read the publication &rarr;</a>
-										</div>
-									</article>
-								</div>
-							</div>
-						</div>
-					</section>
-
-				<!-- Contact -->
-					<section id="contact" class="four">
-						<div class="container">
-							<header style="text-align: center;">
-								<h2>Contact</h2>
-							</header>
-							<ul class="contact-links">
-								<li>
-									<a href="mailto:jpj95@cornell.edu">
-										<span class="icon solid fa-envelope"></span>
-										<span>Email</span>
-									</a>
-								</li>
-								<li>
-									<a href="https://scholar.google.com/" target="_blank" rel="noopener">
-										<span class="icon brands fa-google"></span>
-										<span>Google Scholar</span>
-									</a>
-								</li>
-								<li>
-									<a href="https://www.researchgate.net/" target="_blank" rel="noopener">
-										<span class="icon brands fa-researchgate"></span>
-										<span>ResearchGate</span>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</section>
-			</div>
-		<!-- Footer -->
-			<div id="footer">
-				<!-- Copyright -->
-					<ul class="copyright">
-						<li>&copy; Juan Pablo Jordán. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+		<!-- Header / Sidebar -->
+		<div id="header">
+			<div class="top">
+				<div id="logo">
+					<span class="image avatar48"><img src="images/avatar.jpg" alt="Juan Pablo Jordán" /></span>
+					<h1 id="title">Juan Pablo Jordán</h1>
+					<p>PhD Candidate · Cornell</p>
+				</div>
+				<nav id="nav">
+					<ul>
+						<li><a href="#top" id="top-link"><span class="icon solid fa-home">Intro</span></a></li>
+						<li><a href="#about" id="about-link"><span class="icon solid fa-user">About</span></a></li>
+						<li><a href="#portfolio" id="portfolio-link"><span class="icon solid fa-flask">Research</span></a></li>
+						<li><a href="#contact" id="contact-link"><span class="icon solid fa-envelope">Contact</span></a></li>
 					</ul>
+				</nav>
 			</div>
+			<div class="bottom">
+				<ul class="icons">
+					<li><a href="mailto:jpj95@cornell.edu" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+					<li><a href="https://scholar.google.com/" target="_blank" rel="noopener" class="icon brands fa-google"><span class="label">Google Scholar</span></a></li>
+					<li><a href="https://www.researchgate.net/" target="_blank" rel="noopener" class="icon brands fa-researchgate"><span class="label">ResearchGate</span></a></li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Main -->
+		<div id="main">
+
+			<!-- Intro -->
+			<section id="top" class="one cover">
+				<div class="container">
+					<header>
+						<h2 class="alt">
+							Hi, I'm <strong>Juan Pablo Jordán</strong> — a PhD candidate in the
+							<a href="https://blogs.cornell.edu/kesslerlab/">Kessler Lab</a> at Cornell University.
+						</h2>
+						<p>
+							Based in the <a href="https://ecologyandevolution.cornell.edu/">Department of Ecology &amp; Evolutionary Biology</a> · Ithaca, NY
+						</p>
+					</header>
+					<footer>
+						<a href="#portfolio" class="button scrolly">Explore my research</a>
+					</footer>
+				</div>
+			</section>
+
+			<!-- About Me -->
+			<section id="about" class="three">
+				<div class="container">
+					<header>
+						<h2>About Me</h2>
+					</header>
+					<img src="images/profile_pic_1.jpeg" alt="Profile picture" class="profile-photo" />
+					<p>
+						I'm an organismal biologist, currently doing a PhD in Ecology and Evolutionary Biology at Cornell University.
+						I was born and raised in Ecuador, where I quickly developed a deep interest in the extraordinary biodiversity around me.
+						I spent most of my undergraduate career chasing neotropical spiders, conducting fieldwork in tropical montane forests and the Amazon basin.
+						More recently, I've turned to the natural compounds that mediate ecological interactions — questions I'm exploring throughout my graduate work.
+					</p>
+					<p>
+						I am committed to creating equal opportunity and representation in science, especially for those from developing countries.
+						I believe diversity is an asset that strengthens our community through the enrichment of varied backgrounds, life experiences, and perspectives.
+					</p>
+					<div class="cv-row">
+						<a href="images/CV- Juan Pablo Jordan.pdf" target="_blank" rel="noopener" class="cv-button">
+							<span class="icon solid fa-file-pdf"></span>
+							Download CV
+						</a>
+					</div>
+				</div>
+			</section>
+
+			<!-- Portfolio / Research -->
+			<section id="portfolio" class="two">
+				<div class="container">
+					<header>
+						<h2>Research</h2>
+					</header>
+					<p>
+						My research interests lie at the intersection of chemical ecology and agroecology.
+						By studying diversified cropping systems, I aim to understand the chemical and ecological
+						mechanisms through which species interactions — both above and below ground — mediate
+						resistance to herbivores. I also work in naturally evolving tropical systems to test
+						hypotheses about the maintenance of phytochemical diversity in plants.
+					</p>
+					<div class="row">
+						<div class="col-4 col-12-mobile">
+							<article class="item">
+								<a href="#" class="image fit research-toggle"><img src="images/Graphical_abstract.tiff" alt="" /></a>
+								<header>
+									<a href="#" class="research-toggle">
+										<h3>Intercropping and cover cropping differentially alter maize secondary metabolism and affect herbivore resistance</h3>
+									</a>
+								</header>
+								<div class="research-details">
+									<p>
+										This study examines how intercropping and cover cropping practices reshape maize secondary
+										metabolism and, in turn, plant resistance to herbivores. Using metabolomic profiling and
+										bioassays, we identify shifts in defensive chemistry that depend on the identity of the
+										companion plant and the timing of the diversification strategy.
+									</p>
+									<a class="pub-link" href="#" target="_blank" rel="noopener">Read the publication &rarr;</a>
+								</div>
+							</article>
+							<article class="item">
+								<a href="#" class="image fit research-toggle"><img src="images/pic03.jpg" alt="" /></a>
+								<header>
+									<a href="#" class="research-toggle">
+										<h3>Seed chemical treatments and their impact on the soil microbiome</h3>
+									</a>
+								</header>
+								<div class="research-details">
+									<p>
+										We evaluate how commonly used seed chemical treatments — fungicides, insecticides, and
+										biological coatings — influence the assembly and function of the rhizosphere microbiome,
+										with downstream consequences for plant performance and belowground community dynamics.
+									</p>
+									<a class="pub-link" href="#" target="_blank" rel="noopener">Read the publication &rarr;</a>
+								</div>
+							</article>
+						</div>
+						<div class="col-4 col-12-mobile">
+							<article class="item">
+								<a href="#" class="image fit research-toggle"><img src="images/pic04.jpg" alt="" /></a>
+								<header>
+									<a href="#" class="research-toggle">
+										<h3>Phytochemical diversity correlates with herbivore interactor diversity in the Andean shrub <em>Baccharis latifolia</em></h3>
+									</a>
+								</header>
+								<div class="research-details">
+									<p>
+										Working in Andean ecosystems, this project tests whether plant chemical diversity scales
+										with the diversity of associated herbivores. We use field surveys and untargeted metabolomics
+										in <em>Baccharis latifolia</em> to evaluate hypotheses on the maintenance of phytochemical diversity.
+									</p>
+									<a class="pub-link" href="#" target="_blank" rel="noopener">Read the publication &rarr;</a>
+								</div>
+							</article>
+						</div>
+						<div class="col-4 col-12-mobile">
+							<article class="item">
+								<a href="#" class="image fit research-toggle"><img src="images/figure_1.tiff" alt="" /></a>
+								<header>
+									<a href="#" class="research-toggle">
+										<h3>Intercrop-mediated inducibility affects direct defenses and herbivore resistance, but not indirect defenses, in maize</h3>
+									</a>
+								</header>
+								<div class="research-details">
+									<p>
+										This work shows that intercropping primes maize for stronger induced direct defenses and
+										improved herbivore resistance, while indirect defenses (volatile-mediated natural enemy
+										attraction) remain largely unchanged. The results have implications for designing
+										biodiversity-based pest management.
+									</p>
+									<a class="pub-link" href="#" target="_blank" rel="noopener">Read the publication &rarr;</a>
+								</div>
+							</article>
+							<article class="item">
+								<a href="#" class="image fit research-toggle"><img src="images/pic07.jpg" alt="" /></a>
+								<header>
+									<a href="#" class="research-toggle">
+										<h3>How does intercropping facilitate beneficial maize–AMF interactions and induced responses?</h3>
+									</a>
+								</header>
+								<div class="research-details">
+									<p>
+										An ongoing project investigating how intercropping with legumes shapes arbuscular mycorrhizal
+										fungi (AMF) communities associated with maize, and how those belowground partnerships modulate
+										inducible defenses against aboveground herbivores.
+									</p>
+									<a class="pub-link" href="#" target="_blank" rel="noopener">Read the publication &rarr;</a>
+								</div>
+							</article>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Contact -->
+			<section id="contact" class="four">
+				<div class="container">
+					<header>
+						<h2>Get in Touch</h2>
+					</header>
+					<p class="contact-intro">
+						I'm always happy to talk about chemical ecology, agroecology, or potential collaborations.
+						The best ways to reach me are below.
+					</p>
+					<ul class="contact-links">
+						<li>
+							<a href="mailto:jpj95@cornell.edu">
+								<span class="icon solid fa-envelope"></span>
+								<span>Email</span>
+							</a>
+						</li>
+						<li>
+							<a href="https://scholar.google.com/" target="_blank" rel="noopener">
+								<span class="icon brands fa-google"></span>
+								<span>Google Scholar</span>
+							</a>
+						</li>
+						<li>
+							<a href="https://www.researchgate.net/" target="_blank" rel="noopener">
+								<span class="icon brands fa-researchgate"></span>
+								<span>ResearchGate</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</section>
+
+		</div>
+
+		<!-- Footer -->
+		<div id="footer">
+			<ul class="copyright">
+				<li>&copy; Juan Pablo Jordán. All rights reserved.</li>
+				<li>Design adapted from <a href="http://html5up.net">HTML5 UP</a></li>
+			</ul>
+		</div>
+
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-			<script>
-				// Toggle the research description panels.
-				// Clicking the image OR the title opens/closes the description.
-				// Clicking the publication link inside the panel does NOT collapse it.
-				(function () {
-					document.addEventListener('click', function (e) {
-						var toggle = e.target.closest('.research-toggle');
-						if (!toggle) return;
-
-						// Don't trigger if user clicked the inner publication link.
-						if (e.target.closest('.pub-link')) return;
-
-						e.preventDefault();
-						var item = toggle.closest('.item');
-						if (!item) return;
-
-						item.classList.toggle('is-open');
-					});
-				})();
-			</script>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script>
+			// Toggle research description panels.
+			(function () {
+				document.addEventListener('click', function (e) {
+					var toggle = e.target.closest('.research-toggle');
+					if (!toggle) return;
+					if (e.target.closest('.pub-link')) return;
+					e.preventDefault();
+					var item = toggle.closest('.item');
+					if (!item) return;
+					item.classList.toggle('is-open');
+				});
+			})();
+		</script>
 	</body>
 </html>
