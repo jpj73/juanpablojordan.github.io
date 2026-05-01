@@ -20,16 +20,16 @@
 			   DESIGN TOKENS
 			   ============================================================ */
 			:root {
-				--bg:           #d4d4d2;   /* neutral medium grey */
-				--surface:      #e6e6e4;   /* lighter neutral grey */
-				--surface-alt:  #bfbfbc;   /* deeper grey for contrast band */
-				--sidebar-bg:   #dedede;   /* sidebar in same grey family */
-				--text:         #28282a;   /* near-black, slightly cool */
-				--text-muted:   #66666a;
+				--bg:           #e6e4e0;   /* warm light grey */
+				--surface:      #f3f1ed;   /* lighter warm grey */
+				--surface-alt:  #dcd9d3;   /* deeper warm grey */
+				--sidebar-bg:   #efece7;   /* sidebar in same grey family */
+				--text:         #2a2725;   /* warm near-black */
+				--text-muted:   #6e6a64;
 				--accent:       #c4632b;   /* terracotta / burnt orange */
 				--accent-hover: #d97127;
 				--accent-soft:  #f4e3d2;   /* soft peach */
-				--border:       #b3b3b0;
+				--border:       #c8c3bb;
 				--shadow-sm:    0 1px 2px rgba(30, 25, 20, 0.05), 0 2px 6px rgba(30, 25, 20, 0.05);
 				--shadow-md:    0 4px 12px rgba(30, 25, 20, 0.07), 0 12px 28px rgba(30, 25, 20, 0.09);
 				--radius:       10px;
@@ -517,18 +517,42 @@
 				fill: currentColor;
 				display: block;
 			}
-			/* Sidebar inline-SVG icons inherit the icons-list color/hover. */
+			/* Sidebar inline-SVG icons (Bluesky).
+			   Critical: kill the template's ::before pseudo-element and any
+			   text-indent/overflow rules so the SVG actually renders. */
 			#header .icons li a.icon-svg {
-				display: inline-flex;
-				align-items: center;
-				justify-content: center;
-				width: 32px;
-				height: 32px;
+				display: inline-flex !important;
+				align-items: center !important;
+				justify-content: center !important;
+				width: 2em !important;
+				height: 2em !important;
+				line-height: 1 !important;
+				padding: 0 !important;
+				border: 0 !important;
+				background: transparent !important;
+				text-indent: 0 !important;
+				overflow: visible !important;
+				color: var(--text-muted) !important;
+				transition: color 0.2s ease, transform 0.2s ease;
+			}
+			#header .icons li a.icon-svg:hover {
+				color: var(--accent) !important;
+				transform: translateY(-2px);
+			}
+			#header .icons li a.icon-svg::before,
+			#header .icons li a.icon-svg::after {
+				display: none !important;
+				content: none !important;
 			}
 			#header .icons li a.icon-svg svg {
-				width: 18px;
-				height: 18px;
-				fill: currentColor;
+				width: 1.4em !important;
+				height: 1.4em !important;
+				fill: currentColor !important;
+				display: block !important;
+				pointer-events: none;
+			}
+			#header .icons li a.icon-svg .label {
+				display: none !important;
 			}
 
 			/* ============================================================
@@ -678,12 +702,21 @@
 								</header>
 								<div class="research-details">
 									<p>
-										This study examines how intercropping and cover cropping practices reshape maize secondary
-										metabolism and, in turn, plant resistance to herbivores. Using metabolomic profiling and
-										bioassays, we identify shifts in defensive chemistry that depend on the identity of the
-										companion plant and the timing of the diversification strategy.
+										Crop diversification through intercropping and cover cropping is widely promoted as
+										a sustainable pest-management strategy, yet how each reshapes plant chemical defenses
+										has been unclear. We compared maize grown in mono-, inter-, and cover-cropping systems
+										and characterized both non-volatile secondary metabolites in leaves and roots and
+										herbivore-induced volatile organic compound (VOC) emissions, alongside herbivore
+										resistance assays. The non-volatile metabolite profiles of leaves and roots differed
+										markedly across systems, while VOC emissions remained largely unchanged. Defense-related
+										compounds — benzoxazinoids in particular — were generally upregulated under intercropping,
+										and companion-plant identity mattered: bean intercropping specifically upregulated
+										benzoxazinoid compounds. The work shows that diversified systems can be deliberately
+										designed to enhance constitutive chemical resistance to herbivores, offering a route
+										to reduce insecticide reliance while supporting yield.
 									</p>
-									<a class="pub-link" href="#" target="_blank" rel="noopener">Read the publication &rarr;</a>
+									<p><em>Journal of Applied Ecology, 63, e70284 (2026).</em></p>
+									<a class="pub-link" href="https://besjournals.onlinelibrary.wiley.com/doi/10.1111/1365-2664.70284" target="_blank" rel="noopener">Read the publication &rarr;</a>
 								</div>
 							</article>
 							<article class="item">
@@ -726,17 +759,28 @@
 								<a href="#" class="image fit research-toggle"><img src="images/figure_1.tiff" alt="" /></a>
 								<header>
 									<a href="#" class="research-toggle">
-										<h3>Intercrop-mediated inducibility affects direct defenses and herbivore resistance, but not indirect defenses, in maize</h3>
+										<h3>Intercrop-mediated inducibility affects direct defenses and plant resistance but not indirect defenses in maize</h3>
 									</a>
 								</header>
 								<div class="research-details">
 									<p>
-										This work shows that intercropping primes maize for stronger induced direct defenses and
-										improved herbivore resistance, while indirect defenses (volatile-mediated natural enemy
-										attraction) remain largely unchanged. The results have implications for designing
-										biodiversity-based pest management.
+										Functional intercropping aims to beneficially associate two or more plant species, but
+										the mechanisms behind associational pest resistance — and the relative contributions of
+										direct versus indirect defenses — remain poorly resolved. In this study we manipulated
+										both intercropping (with <em>Desmodium</em>) and prior herbivore induction in maize, then
+										measured chemical defenses, larval performance in no-choice bioassays, and field-scale
+										leaf damage. Defensive secondary metabolite production varied with <em>both</em> the
+										induction treatment and the presence of an intercrop, and intercropping with
+										<em>Desmodium</em> increased plant resistance — reducing larval performance in bioassays
+										and the incidence of damaged leaves in the field. In contrast, indirect resistance did
+										not vary with intercropping or herbivory. Together, the results suggest that under
+										realistic field conditions direct defenses are a more reliable pest-control mechanism
+										than chemical-information-mediated indirect defenses, and propose
+										<strong>intercrop-mediated induced responses</strong> as an integrated ecological mechanism
+										underlying associational resistance.
 									</p>
-									<a class="pub-link" href="#" target="_blank" rel="noopener">Read the publication &rarr;</a>
+									<p><em>Frontiers in Plant Science, 17, 1766071 (2026).</em></p>
+									<a class="pub-link" href="https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2026.1766071/full" target="_blank" rel="noopener">Read the publication &rarr;</a>
 								</div>
 							</article>
 							<article class="item">
