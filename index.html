@@ -20,16 +20,16 @@
 			   DESIGN TOKENS
 			   ============================================================ */
 			:root {
-				--bg:           #e6e4e0;   /* warm light grey */
-				--surface:      #f3f1ed;   /* lighter warm grey */
-				--surface-alt:  #dcd9d3;   /* deeper warm grey */
-				--sidebar-bg:   #efece7;   /* sidebar in same grey family */
-				--text:         #2a2725;   /* warm near-black */
-				--text-muted:   #6e6a64;
+				--bg:           #d4d4d2;   /* neutral medium grey */
+				--surface:      #e6e6e4;   /* lighter neutral grey */
+				--surface-alt:  #bfbfbc;   /* deeper grey for contrast band */
+				--sidebar-bg:   #dedede;   /* sidebar in same grey family */
+				--text:         #28282a;   /* near-black, slightly cool */
+				--text-muted:   #66666a;
 				--accent:       #c4632b;   /* terracotta / burnt orange */
 				--accent-hover: #d97127;
 				--accent-soft:  #f4e3d2;   /* soft peach */
-				--border:       #c8c3bb;
+				--border:       #b3b3b0;
 				--shadow-sm:    0 1px 2px rgba(30, 25, 20, 0.05), 0 2px 6px rgba(30, 25, 20, 0.05);
 				--shadow-md:    0 4px 12px rgba(30, 25, 20, 0.07), 0 12px 28px rgba(30, 25, 20, 0.09);
 				--radius:       10px;
@@ -199,7 +199,7 @@
 			   SECTIONS — base
 			   ============================================================ */
 			#main section {
-				padding: 5em 0 !important;
+				padding: 2.75em 0 !important;
 				background: transparent !important;
 			}
 			#main section .container {
@@ -209,7 +209,7 @@
 				padding-right: 2em !important;
 			}
 			#main section > .container > header {
-				margin-bottom: 2.5em;
+				margin-bottom: 1.75em;
 				text-align: center;
 			}
 			#main section > .container > header h2 {
@@ -244,7 +244,7 @@
 			   ============================================================ */
 			#top.cover {
 				min-height: 0 !important;
-				padding: 5.5em 0 5em 0 !important;
+				padding: 3.5em 0 3em 0 !important;
 				background:
 					radial-gradient(ellipse at top right, rgba(196, 99, 43, 0.14), transparent 60%),
 					radial-gradient(ellipse at bottom left, rgba(196, 99, 43, 0.09), transparent 55%),
@@ -350,7 +350,7 @@
 			   ============================================================ */
 			#portfolio > .container > p {
 				max-width: 880px;
-				margin: 0 auto 3em auto;
+				margin: 0 auto 2em auto;
 				text-align: center;
 				color: var(--text-muted);
 				font-size: 1.05em;
@@ -461,7 +461,7 @@
 				text-align: center;
 				color: var(--text-muted);
 				max-width: 580px;
-				margin: 0 auto 2em auto;
+				margin: 0 auto 1.5em auto;
 				font-size: 1em;
 				line-height: 1.7;
 			}
@@ -598,8 +598,8 @@
 					<li><a href="https://scholar.google.com/" target="_blank" rel="noopener" class="icon brands fa-google"><span class="label">Google Scholar</span></a></li>
 					<li><a href="https://www.researchgate.net/" target="_blank" rel="noopener" class="icon brands fa-researchgate"><span class="label">ResearchGate</span></a></li>
 					<li><a href="https://bsky.app/" target="_blank" rel="noopener" class="icon-svg" aria-label="Bluesky">
-						<svg viewBox="0 0 600 530" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-							<path d="M135.7 44.4C211.7 101.4 293.4 216.9 323.4 278.9c30-62 111.7-177.5 187.7-234.5 54.8-41.1 143.7-72.9 143.7 28.3 0 20.2-11.6 169.7-18.4 194-23.6 84.4-109.7 105.9-186.3 92.9 133.9 22.8 168 98.3 94.4 173.8-139.8 143.4-200.9-36-216.6-82-2.9-8.4-4.2-12.4-4.3-9 0-3.4-1.5.6-4.3 9-15.7 46-76.8 225.4-216.6 82C29.1 458 63.2 382.4 197.1 359.6 120.5 372.6 34.4 351.1 10.8 266.7 4 242.4-7.6 92.9-7.6 72.7c0-101.2 88.9-69.4 143.7-28.3z" transform="translate(7.6 0)"/>
+						<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+							<path d="M111.8 62.2C170.2 105.9 233 194.7 256 242.4c23-47.7 85.8-136.5 144.2-180.2c42.1-31.5 110.3-55.9 110.3 21.9c0 15.5-8.9 130.5-14.1 149.2C478.2 298 412 314.6 353.1 304.5c103 17.5 129.2 75.5 72.5 133.5c-107.7 110.2-154.8-27.7-166.9-63c-2.2-6.5-3.2-9.5-3.2-7c0-2.5-1 .5-3.2 7c-12.2 35.3-59.2 173.2-166.9 63c-56.8-58-30.6-116 72.5-133.5C99.9 314.6 33.7 298 28.6 233.3C23.4 214.6 14.5 99.6 14.5 84.1c0-77.8 68.2-53.4 110.3-21.9z"/>
 						</svg>
 						<span class="label">Bluesky</span>
 					</a></li>
@@ -792,8 +792,8 @@
 						<li>
 							<a href="https://bsky.app/" target="_blank" rel="noopener" aria-label="Bluesky">
 								<span class="icon">
-									<svg viewBox="0 0 600 530" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-										<path d="M135.7 44.4C211.7 101.4 293.4 216.9 323.4 278.9c30-62 111.7-177.5 187.7-234.5 54.8-41.1 143.7-72.9 143.7 28.3 0 20.2-11.6 169.7-18.4 194-23.6 84.4-109.7 105.9-186.3 92.9 133.9 22.8 168 98.3 94.4 173.8-139.8 143.4-200.9-36-216.6-82-2.9-8.4-4.2-12.4-4.3-9 0-3.4-1.5.6-4.3 9-15.7 46-76.8 225.4-216.6 82C29.1 458 63.2 382.4 197.1 359.6 120.5 372.6 34.4 351.1 10.8 266.7 4 242.4-7.6 92.9-7.6 72.7c0-101.2 88.9-69.4 143.7-28.3z" transform="translate(7.6 0)"/>
+									<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+										<path d="M111.8 62.2C170.2 105.9 233 194.7 256 242.4c23-47.7 85.8-136.5 144.2-180.2c42.1-31.5 110.3-55.9 110.3 21.9c0 15.5-8.9 130.5-14.1 149.2C478.2 298 412 314.6 353.1 304.5c103 17.5 129.2 75.5 72.5 133.5c-107.7 110.2-154.8-27.7-166.9-63c-2.2-6.5-3.2-9.5-3.2-7c0-2.5-1 .5-3.2 7c-12.2 35.3-59.2 173.2-166.9 63c-56.8-58-30.6-116 72.5-133.5C99.9 314.6 33.7 298 28.6 233.3C23.4 214.6 14.5 99.6 14.5 84.1c0-77.8 68.2-53.4 110.3-21.9z"/>
 									</svg>
 								</span>
 								<span>Bluesky</span>
