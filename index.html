@@ -432,9 +432,28 @@
 				            padding 0.35s ease;
 			}
 			#portfolio .item.is-open .research-details {
-				max-height: 800px;
+				max-height: 280px;
 				opacity: 1;
 				padding: 1.1em 1.25em 1.25em 1.25em;
+				overflow-y: auto;
+			}
+			/* Subtle scrollbar that matches the palette. */
+			#portfolio .item .research-details::-webkit-scrollbar {
+				width: 6px;
+			}
+			#portfolio .item .research-details::-webkit-scrollbar-track {
+				background: transparent;
+			}
+			#portfolio .item .research-details::-webkit-scrollbar-thumb {
+				background: rgba(196, 99, 43, 0.35);
+				border-radius: 3px;
+			}
+			#portfolio .item .research-details::-webkit-scrollbar-thumb:hover {
+				background: rgba(196, 99, 43, 0.6);
+			}
+			#portfolio .item .research-details {
+				scrollbar-width: thin;
+				scrollbar-color: rgba(196, 99, 43, 0.35) transparent;
 			}
 			#portfolio .item .research-details p {
 				margin: 0 0 0.5em 0;
@@ -632,10 +651,10 @@
 			</div>
 			<div class="bottom">
 				<ul class="icons">
-					<li><a href="mailto:jpj95@cornell.edu" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-					<li><a href="https://scholar.google.com/" target="_blank" rel="noopener" class="icon brands fa-google"><span class="label">Google Scholar</span></a></li>
-					<li><a href="https://www.researchgate.net/" target="_blank" rel="noopener" class="icon brands fa-researchgate"><span class="label">ResearchGate</span></a></li>
-					<li><a href="https://bsky.app/" target="_blank" rel="noopener" class="icon-svg" aria-label="Bluesky">
+					<li><a href="mailto:jpj73@cornell.edu" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+					<li><a href="https://scholar.google.com/citations?user=WX1jrPkAAAAJ&hl=en&authuser=1" target="_blank" rel="noopener" class="icon brands fa-google"><span class="label">Google Scholar</span></a></li>
+					<li><a href="https://www.researchgate.net/profile/Juan-Jordan-5?ev=hdr_xprf&_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6ImhvbWUiLCJwYWdlIjoicHVibGljYXRpb24iLCJwcmV2aW91c1BhZ2UiOiJob21lIiwicG9zaXRpb24iOiJnbG9iYWxIZWFkZXIifX0" target="_blank" rel="noopener" class="icon brands fa-researchgate"><span class="label">ResearchGate</span></a></li>
+					<li><a href="https://bsky.app/profile/juanpajordan.bsky.social" target="_blank" rel="noopener" class="icon-svg" aria-label="Bluesky">
 						<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 							<path d="M111.8 62.2C170.2 105.9 233 194.7 256 242.4c23-47.7 85.8-136.5 144.2-180.2c42.1-31.5 110.3-55.9 110.3 21.9c0 15.5-8.9 130.5-14.1 149.2C478.2 298 412 314.6 353.1 304.5c103 17.5 129.2 75.5 72.5 133.5c-107.7 110.2-154.8-27.7-166.9-63c-2.2-6.5-3.2-9.5-3.2-7c0-2.5-1 .5-3.2 7c-12.2 35.3-59.2 173.2-166.9 63c-56.8-58-30.6-116 72.5-133.5C99.9 314.6 33.7 298 28.6 233.3C23.4 214.6 14.5 99.6 14.5 84.1c0-77.8 68.2-53.4 110.3-21.9z"/>
 						</svg>
@@ -818,25 +837,25 @@
 					</p>
 					<ul class="contact-links">
 						<li>
-							<a href="mailto:jpj95@cornell.edu">
+							<a href="mailto:jpj73@cornell.edu" aria-label="Email">
 								<span class="icon solid fa-envelope"></span>
-								<span>Email</span>
+								<span>jpj73@cornell.edu</span>
 							</a>
 						</li>
 						<li>
-							<a href="https://scholar.google.com/" target="_blank" rel="noopener">
+							<a href="https://scholar.google.com/citations?user=WX1jrPkAAAAJ&hl=en&authuser=1" target="_blank" rel="noopener">
 								<span class="icon brands fa-google"></span>
 								<span>Google Scholar</span>
 							</a>
 						</li>
 						<li>
-							<a href="https://www.researchgate.net/" target="_blank" rel="noopener">
+							<a href="https://www.researchgate.net/profile/Juan-Jordan-5?ev=hdr_xprf&_tp=eyJjb250ZXh0Ijp7ImZpcnN0UGFnZSI6ImhvbWUiLCJwYWdlIjoicHVibGljYXRpb24iLCJwcmV2aW91c1BhZ2UiOiJob21lIiwicG9zaXRpb24iOiJnbG9iYWxIZWFkZXIifX0" target="_blank" rel="noopener">
 								<span class="icon brands fa-researchgate"></span>
 								<span>ResearchGate</span>
 							</a>
 						</li>
 						<li>
-							<a href="https://bsky.app/" target="_blank" rel="noopener" aria-label="Bluesky">
+							<a href="https://bsky.app/profile/juanpajordan.bsky.social" target="_blank" rel="noopener" aria-label="Bluesky">
 								<span class="icon">
 									<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 										<path d="M111.8 62.2C170.2 105.9 233 194.7 256 242.4c23-47.7 85.8-136.5 144.2-180.2c42.1-31.5 110.3-55.9 110.3 21.9c0 15.5-8.9 130.5-14.1 149.2C478.2 298 412 314.6 353.1 304.5c103 17.5 129.2 75.5 72.5 133.5c-107.7 110.2-154.8-27.7-166.9-63c-2.2-6.5-3.2-9.5-3.2-7c0-2.5-1 .5-3.2 7c-12.2 35.3-59.2 173.2-166.9 63c-56.8-58-30.6-116 72.5-133.5C99.9 314.6 33.7 298 28.6 233.3C23.4 214.6 14.5 99.6 14.5 84.1c0-77.8 68.2-53.4 110.3-21.9z"/>
